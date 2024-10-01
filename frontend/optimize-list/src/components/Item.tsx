@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ItemData } from "../api/fetch-list";
 
 
@@ -7,12 +8,17 @@ type ItemProps = {
     onClick: () => void;
     };
 
-function Item({ item, isSelected, onClick }: ItemProps) {
+function Item({ item, isSelected: initialSelection, onClick }: ItemProps) {
+  const [isSelected, setSelected] = useState(initialSelection);
 
   return (
+    // biome-ignore lint: no need for key event
     <li
       style={{ backgroundColor: isSelected ? 'yellow' : 'white', cursor: 'pointer'}}
-      onClick={onClick}
+      onClick={() => {
+        setSelected((old) => !old);
+        onClick();
+      }}
     >
         ID {item.id} - {item.name}
     </li>
