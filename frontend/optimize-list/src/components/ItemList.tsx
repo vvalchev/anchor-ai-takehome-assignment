@@ -3,7 +3,7 @@ import Item from './Item';
 
 type ItemListProps = {
     items: ItemData[];
-    selectedItemIds: number[];
+    selectedItemIds: Set<number>;
     onSelectItem: (id: number) => void;
     };
 function ItemList({ items, selectedItemIds, onSelectItem }: ItemListProps) {
@@ -14,7 +14,7 @@ function ItemList({ items, selectedItemIds, onSelectItem }: ItemListProps) {
         <Item
           key={item.id}
           item={item}
-          isSelected={selectedItemIds.includes(item.id)}
+          isSelected={selectedItemIds.has(item.id)}
           onClick={() => onSelectItem(item.id)}
         />
       ))}
